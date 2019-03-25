@@ -58,8 +58,37 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.filter((currentHour) => currentHour % 2);
 }
+
+var allTheHours = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23
+];
+console.log(hoursPassedToday(4, allTheHours)); // expect to see [0, 1, 2, 3]
+console.log(hoursPassedToday(6, allTheHours)); // expect to see [0, 1, 2, 3, 4, 5]
 
 /**
  * Write a function that returns an array including all of

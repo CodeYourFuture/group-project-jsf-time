@@ -58,7 +58,7 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return hoursOfDay.filter((currentHour) => currentHour % 2);
+  return hoursOfDay.filter((hour) => hour < currentHour);
 }
 
 var allTheHours = [
@@ -103,7 +103,7 @@ console.log(hoursPassedToday(6, allTheHours)); // expect to see [0, 1, 2, 3, 4, 
  * @return {Array<Number>}
  */
 function hoursAheadToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.filter((hour) => hour > currentHour);
 }
 
 /**

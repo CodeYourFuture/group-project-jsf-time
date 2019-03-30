@@ -21,8 +21,15 @@ YOU MAY EDIT THE LINES BELOW
  * @param {Array<String>} daysOfWeek The array will be: ['Monday', 'Tuesday', Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday]
  * @return {Number}
  */
+
 function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
-  return -1;
+  if (currentDay === "Saturday" && currentHour < 11) {
+    return 0;
+  } else if (currentDay === "Saturday" && currentHour >= 11) {
+    return 7;
+  } else {
+    return daysOfWeek.indexOf("Saturday") - (new Date().getDay() - 1);
+  }
 }
 
 /**
@@ -42,7 +49,13 @@ function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
  * @return {Number}
  */
 function hoursUntilNextDinner(currentHour, hourOfDinner) {
-  return -1;
+  if (currentHour < hourOfDinner) {
+    return hoursOfDay.slice(currentHour, hourOfDinner).length;
+  } else {
+    if (currentHour >= hourOfDinner) {
+      return hoursOfDay.slice(currentHour, 24).length + hoursOfDay.slice(0, hourOfDinner).length;
+    }
+  }
 }
 
 /**
@@ -58,7 +71,7 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.slice(0, currentHour);
 }
 
 /**
@@ -74,7 +87,7 @@ function hoursPassedToday(currentHour, hoursOfDay) {
  * @return {Array<Number>}
  */
 function hoursAheadToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.slice(hoursOfDay.indexOf(currentHour) + 1);
 }
 
 /**
@@ -100,7 +113,15 @@ function hoursAheadToday(currentHour, hoursOfDay) {
  * @return {Number}
  */
 function hoursToStudy(currentHour, hoursOfDay, currentDay, daysOfWeek) {
-  return -1;
+  if (currentHour <= 11 && currentDay === "Saturday") {
+    return hoursOfDay.slice(0, 11).length - hoursOfDay.slice(0, currentHour).length;
+  } else {
+    return (
+      hoursAheadToday(currentHour, hoursOfDay).length +
+      (numberOfDaysUntilNextClass(currentDay, daysOfWeek) - 1) * 24 +
+      hoursOfDay.slice(hoursOfDay.indexOf(0), hoursOfDay.indexOf(11)).length
+    );
+  }
 }
 
 /*

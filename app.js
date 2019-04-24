@@ -22,6 +22,7 @@ YOU MAY EDIT THE LINES BELOW
  * @return {Number}
  */
 function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
+  if ()
   return -1;
 }
 
@@ -42,8 +43,18 @@ function numberOfDaysUntilNextClass(currentDay, daysOfWeek) {
  * @return {Number}
  */
 function hoursUntilNextDinner(currentHour, hourOfDinner) {
-  return -1;
-}
+  if (hourOfDinner >= currentHour){
+    return hourOfDinner - currentHour;
+  }else{
+    return hourOfDinner - currentHour + 24;
+  }
+  }
+
+  var remainingHour = hoursUntilNextDinner(15, 9);
+
+  console.log(remainingHour);
+
+ 
 
 /**
  * Write a function that returns an array including all of
@@ -58,8 +69,37 @@ function hoursUntilNextDinner(currentHour, hourOfDinner) {
  * @return {Array<Number>}
  */
 function hoursPassedToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.filter((hour) => hour < currentHour);
 }
+
+var allTheHours = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23
+];
+console.log(hoursPassedToday(4, allTheHours)); // expect to see [0, 1, 2, 3]
+console.log(hoursPassedToday(6, allTheHours)); // expect to see [0, 1, 2, 3, 4, 5]
 
 /**
  * Write a function that returns an array including all of
@@ -74,7 +114,7 @@ function hoursPassedToday(currentHour, hoursOfDay) {
  * @return {Array<Number>}
  */
 function hoursAheadToday(currentHour, hoursOfDay) {
-  return [];
+  return hoursOfDay.filter((hour) => hour > currentHour);
 }
 
 /**
